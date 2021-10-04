@@ -125,3 +125,21 @@ function blogGetPostByUrl(string $url): ?array
 
     return array_pop($data);
 }
+
+function blogGetNewPosts(): ?array
+{
+    $postsGetNewPost = [];
+    $posts = blogGetPost();
+
+    usort($posts, function ($a, $b) {
+        return (strtotime($a['publication_date']) - strtotime($b['publication_date']));
+    });
+
+    $postsSlice = array_slice($posts, 0, 3);
+
+    foreach ($postsSlice as $postsNew) {
+        $postsGetNewPost[] = $postsNew;
+    }
+
+    return $postsGetNewPost;
+}

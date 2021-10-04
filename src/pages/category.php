@@ -7,7 +7,7 @@
                     <img src="/post-placeholder.png" alt="<?= $post['name'] ?>" width="200"/>
                 </a>
                 <a href="/<?= $post['url'] ?>" title="<?= $post['name'] ?>"><?= $post['name'] ?></a>
-                <span><?= $post['author'] ?></span>
+                <span class="author-name">Author: <?= $post['author'] ?></span>
                 <span><?= $post['publication_date'] ?></span>
             </div>
         <?php endforeach; ?>
