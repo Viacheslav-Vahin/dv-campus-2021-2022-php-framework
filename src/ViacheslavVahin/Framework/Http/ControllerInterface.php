@@ -2,7 +2,9 @@
 
 namespace ViacheslavVahin\Framework\Http;
 
+use ViacheslavVahin\Framework\Http\Response\Raw;
+
 interface ControllerInterface
 {
-    public function execute(): string;
+    public function execute(): Raw;
 }
