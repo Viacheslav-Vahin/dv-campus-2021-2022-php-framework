@@ -1,28 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ViacheslavVahin\Blog\Controller;
 
 use ViacheslavVahin\Framework\Http\ControllerInterface;
+use ViacheslavVahin\Framework\Http\Response\Raw;
 
 class Category implements ControllerInterface
 {
-    private \ViacheslavVahin\Framework\Http\Request $request;
+    private \ViacheslavVahin\Framework\View\PageResponse $pageResponse;
 
     /**
-     * @param \ViacheslavVahin\Framework\Http\Request $request
+     * @param \ViacheslavVahin\Framework\View\PageResponse $pageResponse
      */
     public function __construct(
-        \ViacheslavVahin\Framework\Http\Request $request
+        \ViacheslavVahin\Framework\View\PageResponse $pageResponse
     ) {
-        $this->request = $request;
+        $this->pageResponse = $pageResponse;
     }
-    public function execute(): string
-    {
-        $data = $this->request->getParameter('category');
-        $page = 'category.php';
 
-        ob_start();
-        require_once "../src/page.php";
-        return ob_get_clean();
+    /**
+     * @return Raw
+     */
+    public function execute(): Raw
+    {
+        return $this->pageResponse->setBody(\ViacheslavVahin\Blog\Block\Category::class);
     }
 }
