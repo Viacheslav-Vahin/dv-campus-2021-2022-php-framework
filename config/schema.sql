@@ -1,12 +1,12 @@
-DROP TABLE IF EXISTS `author`;
-#---
-DROP TABLE IF EXISTS `post`;
-#---
-DROP TABLE IF EXISTS `category`;
-#---
 DROP TABLE IF EXISTS `category_post`;
 #---
 DROP TABLE IF EXISTS `daily_statistics`;
+#---
+DROP TABLE IF EXISTS `post`;
+#---
+DROP TABLE IF EXISTS `author`;
+#---
+DROP TABLE IF EXISTS `category`;
 #---
 CREATE TABLE `author`
 (
