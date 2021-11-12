@@ -21,3 +21,21 @@ ORDER BY `number_of_posts` DESC;
 SELECT `category`.*, COUNT(DISTINCT `post`.`author_id`) as `number_of_authors` FROM `category_post` JOIN `post` USING(`post_id`) JOIN `category` USING(`category_id`)
 GROUP BY `category_post`.`category_id`
 ORDER BY `number_of_authors` DESC;
+# get authors with namesakes
+SELECT `lastname`, `firstname`
+FROM `author`
+WHERE `lastname` IN
+      (
+          SELECT `lastname` FROM `author`
+          GROUP BY `lastname`
+          HAVING COUNT(`lastname`) > 1
+      );
+# get authors without namesakes
+SELECT `lastname`, `firstname`
+FROM `author`
+WHERE `lastname` NOT IN
+      (
+          SELECT `lastname` FROM `author`
+          GROUP BY `lastname`
+          HAVING COUNT(`lastname`) > 1
+      );
