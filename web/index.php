@@ -2,13 +2,9 @@
 
 declare(strict_types=1);
 
-require_once '../vendor/autoload.php';
-
-$containerBuilder = new \DI\ContainerBuilder();
-
 try {
-    $containerBuilder->addDefinitions('../config/di.php');
-    $container = $containerBuilder->build();
+    require_once  __DIR__ . '/../src/bootstrap.php';
+    /** @var \DI\Container $container */
     /** @var \ViacheslavVahin\Framework\Http\RequestDispatcher $requestDispatcher */
     $requestDispatcher = $container->get(\ViacheslavVahin\Framework\Http\RequestDispatcher::class);
     $requestDispatcher->dispatch();
