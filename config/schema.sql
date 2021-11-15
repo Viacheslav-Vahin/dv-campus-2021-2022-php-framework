@@ -11,18 +11,19 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `author`
 (
     `author_id` int unsigned NOT NULL AUTO_INCREMENT COMMENT 'Author ID',
-    `name`      varchar(127) NOT NULL COMMENT 'Name',
+    `firstname` varchar(127) NOT NULL COMMENT 'First name',
+    `lastname` varchar(127) NOT NULL COMMENT 'Last name',
     `url`       varchar(127) NOT NULL COMMENT 'URL',
     PRIMARY KEY (`author_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='Author Entity';
 #---
-INSERT INTO `author` (`name`, `url`)
-VALUES ('Author 1', 'author-1'),
-       ('Author 2', 'author-2'),
-       ('Author 3', 'author-3'),
-       ('Author 4', 'author-4'),
-       ('Author 5', 'author-5');
+INSERT INTO `author` (`firstname`, `lastname`, `url`)
+VALUES ('Author', 'name1', 'author-1'),
+       ('Author', 'name2', 'author-2'),
+       ('Author', 'name3', 'author-3'),
+       ('Author', 'name4', 'author-4'),
+       ('Author', 'name5', 'author-5');
 #---
 CREATE TABLE `post`
 (
