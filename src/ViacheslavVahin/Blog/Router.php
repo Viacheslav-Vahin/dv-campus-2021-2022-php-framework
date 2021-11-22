@@ -40,9 +40,12 @@ class Router implements \ViacheslavVahin\Framework\Http\RouterInterface
      */
     public function match(string $requestUrl): string
     {
+        if (!$requestUrl) {
+            return '';
+        }
         if ($category = $this->categoryRepository->getByUrl($requestUrl)) {
             $this->request->setParameter('category', $category);
-            $this->request->setParameter('posts', $this->postRepository->getByIds($category->getPostsIds()));
+            $this->request->setParameter('posts', $this->postRepository->getByCategoryId($category->getCategoryId()));
             return Category::class;
         }
 

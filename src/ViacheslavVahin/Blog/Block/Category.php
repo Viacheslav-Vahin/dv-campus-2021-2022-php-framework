@@ -45,9 +45,7 @@ class Category extends \ViacheslavVahin\Framework\View\Block
      */
     public function getCategoryPosts(): array
     {
-        return $this->postRepository->getByIds(
-            $this->getCategory()->getPostsIds()
-        );
+        return $this->postRepository->getByCategoryId($this->getCategory()->getCategoryId());
     }
 
     /**

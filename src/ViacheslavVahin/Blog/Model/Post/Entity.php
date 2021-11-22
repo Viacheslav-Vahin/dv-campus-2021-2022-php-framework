@@ -13,7 +13,9 @@ class Entity
 
     private string $description;
 
-    private string $publicationDate;
+    private int $createdAt;
+
+    private int $updatedAt;
 
     private int $authorId;
 
@@ -94,20 +96,39 @@ class Entity
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getPublicationDate(): string
+    public function getCreatedAt(): int
     {
-        return $this->publicationDate;
+        return $this->createdAt;
     }
 
     /**
-     * @param string $publicationDate
+     * @param int $createdAt
      * @return $this
      */
-    public function setPublicationDate(string $publicationDate): Entity
+    public function setCreatedAt(int $createdAt): Entity
     {
-        $this->publicationDate = $publicationDate;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUpdatedAt(): int
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param int $updatedAt
+     * @return $this
+     */
+    public function setUpdatedAt(int $updatedAt): Entity
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

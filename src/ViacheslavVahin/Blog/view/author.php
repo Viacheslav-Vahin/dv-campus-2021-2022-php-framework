@@ -14,7 +14,7 @@ $author = $block->getAuthor();
                 </a>
                 <a href="/<?= $post->getUrl() ?>" title="<?= $post->getName() ?>"><?= $post->getName() ?></a>
                 <span class="author-name">Author: <?= $post->getAuthorId() ?></span>
-                <span><?= $post->getPublicationDate() ?></span>
+                <span><?= $post->getCreatedAt() ?></span>
             </div>
         <?php endforeach; ?>
     </div>
