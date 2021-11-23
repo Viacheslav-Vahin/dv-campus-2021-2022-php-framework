@@ -16,7 +16,9 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
     private \ViacheslavVahin\Framework\Database\Adapter\AdapterInterface $adapter;
     private OutputInterface $output;
     private int $numberOfPosts = 0;
-    private const AUTHOR_COUNT = 20;
+    private const AUTHOR_COUNT = 50000;
+    private const CATEGORY_COUNT = 1500;
+    private const CATEGORY_WITH_POSTS_COUNT = 1000;
     private const STATISTIC_DAYS = 1;
 
     /**
@@ -60,12 +62,26 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
      */
     private function generateData(): void
     {
-        $this->profile([$this, 'truncateTables']);
-        $this->profile([$this, 'generateCategoryPosts']);
-        $this->profile([$this, 'generateDailyStatistics']);
-        $this->profile([$this, 'generatePosts']);
-        $this->profile([$this, 'generateAuthors']);
-        $this->profile([$this, 'generateCategories']);
+        $callbacks = [
+            [$this, 'truncateTables'],
+            [$this, 'generateAuthors'],
+            [$this, 'generatePosts'],
+            [$this, 'generateCategories'],
+            [$this, 'generateCategoryPosts'],
+            [$this, 'generateDailyStatistics'],
+        ];
+        $connection = $this->adapter->getConnection();
+
+        foreach ($callbacks as $callback) {
+            try {
+                $connection->beginTransaction();
+                $this->profile($callback);
+                $connection->commit();
+            } catch (\Exception $e) {
+                $connection->rollBack();
+                throw $e;
+            }
+        }
     }
 
     /**
@@ -148,27 +164,16 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
      */
     private function generateCategories(): void
     {
-        $categories = [
-            'News',
-            'Articles',
-            'Sport',
-            'Media',
-            'Stories',
-            'Business',
-            'World news',
-            'Finance',
-            'Auto',
-            'HiTech',
-        ];
         $statement = $this->adapter->getConnection()
             ->prepare(<<<SQL
                 INSERT INTO category (`name`, `url`)
                 VALUES (:name, :url);
             SQL
             );
-        foreach ($categories as $category) {
-            $statement->bindValue(':name', $category);
-            $statement->bindValue(':url', str_replace(' ', '-', strtolower($category)));
+        for ($i = 1; $i <= self::CATEGORY_COUNT; $i++) {
+            $name = "Category $i";
+            $statement->bindValue(':name', $name);
+            $statement->bindValue(':url', str_replace(' ', '-', strtolower($name)));
             $statement->execute();
         }
     }
@@ -185,7 +190,7 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
                 VALUES (:post_id, :category_id);
             SQL
             );
-        $categoryIds = array_rand(array_flip(range(1, 10)), 7);
+        $categoryIds = array_rand(array_flip(range(1, self::CATEGORY_COUNT)), self::CATEGORY_WITH_POSTS_COUNT);
 
         for ($i = 1; $i <= $this->numberOfPosts; $i++) {
             $postCategories = (array)array_rand(array_flip($categoryIds), random_int(1, 3));

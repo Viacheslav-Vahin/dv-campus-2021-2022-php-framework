@@ -130,3 +130,5 @@ VALUES ('1987-11-14', 1, 1),
        ('1987-11-14', 13, 3),
        ('1987-11-14', 14, 1),
        ('1987-11-14', 15, 2);
+#---
+ALTER TABLE `post` ADD UNIQUE INDEX `POST_INDEX_URL` (`url`);

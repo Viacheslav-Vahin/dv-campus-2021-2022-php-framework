@@ -18,7 +18,7 @@
                 <?php else : ?>
                     <span>No author</span>
                 <?php endif ?>
-                <span><?= $post->getPublicationDate() ?></span>
+                <span><?= $post->getCreatedAt() ?></span>
             </div>
         <?php endforeach; ?>
     </div>

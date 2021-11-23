@@ -20,10 +20,9 @@ class Post extends \ViacheslavVahin\Framework\View\Block
      * @param \ViacheslavVahin\Blog\Model\Author\Repository $authorRepository
      */
     public function __construct(
-        \ViacheslavVahin\Framework\Http\Request       $request,
+        \ViacheslavVahin\Framework\Http\Request $request,
         \ViacheslavVahin\Blog\Model\Author\Repository $authorRepository
-    )
-    {
+    ) {
         $this->request = $request;
         $this->authorRepository = $authorRepository;
     }
