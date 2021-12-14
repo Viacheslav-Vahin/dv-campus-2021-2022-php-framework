@@ -6,36 +6,23 @@
 <head>
     <meta charset="UTF-8">
     <title>{DV.Campus} PHP Framework</title>
-    <style>
-        header,
-        main,
-        footer {
-            border: 1px dashed black;
-        }
-
-        .post-list {
-            display: flex;
-        }
-
-        .post-list .post {
-            max-width: 30%;
-        }
-        .post a {
-            display: block;
-        }
-        .author-name {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/main.min.css"/>
 </head>
 <body>
 <header>
-    <a href="/" title="{DV.Campus} PHP Framework">
-        <img src="logo.jpg" alt="{DV.Campus} Logo" width="200"/>
-    </a>
-    <nav>
-        <?= $this->render(\ViacheslavVahin\Blog\Block\CategoryList::class) ?>
-    </nav>
+    <div class="header-wrapper content-wrapper">
+        <a href="/" title="{DV.Campus} PHP Framework">
+            <img src="/images/logo.jpg" alt="{DV.Campus} Logo" width="200"/>
+        </a>
+        <nav>
+            <div class="menu-btn-mobile" id="menu-btn-mobile">
+                <button class="wrapper-button">
+                    <i></i><i></i><i></i>
+                </button>
+            </div>
+            <?= $this->render(\ViacheslavVahin\Blog\Block\CategoryList::class) ?>
+        </nav>
+    </div>
 </header>
 
 <main>
@@ -43,20 +30,22 @@
 </main>
 
 <footer>
-    <nav>
-        <ul>
-            <li>
+    <div class="footer-links-wrapper content-wrapper">
+        <ul class="footer-links">
+            <li class="footer-link-item">
                 <a href="/about-us">About Us</a>
             </li>
-            <li>
+            <li class="footer-link-item">
                 <a href="/terms-and-conditions">Terms & Conditions</a>
             </li>
-            <li>
+            <li class="footer-link-item">
                 <a href="/contact-us">Contact Us</a>
             </li>
         </ul>
-    </nav>
-    <p>© Default Value 2021. All Rights Reserved.</p>
+    </div>
+    <div class="copyright">
+        <p>© Default Value 2021. All Rights Reserved.</p>
+    </div>
 </footer>
 </body>
 </html>
